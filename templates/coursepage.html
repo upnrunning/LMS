@@ -1,0 +1,85 @@
+{% extends "header.html" %}
+{% block body %}
+
+
+<div class="container fluid">
+	<div class="row">
+		<div class="col-4 justify-content-start bg-light border border-info rounded">
+	<ul class="list-group list-group-flush">
+	<li class="list-group-item list-group-item-info">
+	<h2> {{course.name}} </h2>
+	</li>
+	<li class="list-group-item list-group-item-info">
+	<b> Current mark: </b>  {{markings[:][0].curr_mark}} 
+	</li>
+	<li class="list-group-item list-group-item-info">
+	 <b> Exam mark: </b> {{markings[:][0].exam_mark}}
+	</li>
+	{% if markings[:][0].curr_mark is not none and markings[:][0].curr_mark is not none %}
+	<li class="list-group-item list-group-item-info">
+	 <b> Course overall grade: </b>  {{(markings[:][0].curr_mark * course.curr_weight +  markings[:][0].exam_mark * course.exam_weight)|round}} 
+	</li>
+	{% else %}
+	<li class="list-group-item list-group-item-info">
+	 <b> Course overall grade: </b>  Not passed yet 
+	</li>
+	{% endif %}
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+	    $("#calc").click(function() {
+	        var current = $("#curr_mark").val();                                   
+	        var exam = $("#exam_mark").val();       
+	        if (current>=0 && current <=10 && exam >=0 && exam <=10) {                         
+	        var newValue = Math.round(parseFloat(current) * {{course.curr_weight}} 
+	        + parseFloat(exam) * {{course.exam_weight}});
+	        $('span').text(newValue);
+	        }
+	    	else {
+	    	$('span').text("Invalid input!")
+	    	$("#curr_mark").val("0")
+	    	$("#exam_mark").val("0")
+	    	}     
+	        
+	    	});
+		});
+	</script>
+
+	<br>
+	<form class="bg-light pl-3 pt-1">
+	<div class form-group>
+		<label for = "price1" class="spacebig"> <h4> Calculate a custom grade: </h4> </label>
+	  <label for="curr_mark">Current mark:</b>
+	  {% if markings[:][0].curr_mark is not none %}
+      <input type="number" step="0.01" class="form-control" id="curr_mark" value="{{markings[:][0].curr_mark}}"></input> 
+      {% else %}
+      <input id="curr_mark" type="number" step="0.01" class="form-control"  value="0"></input>
+      {% endif %} 
+      <br>
+      <label for="exam_mark">Exam mark: </label>
+      {%if markings[:][0].curr_mark is not none%}
+      <input id="exam_mark" type="number" step="0.01" class="form-control" value="{{markings[:][0].exam_mark}}"></input>
+      {% else %}
+      <input id="exam_mark" type="number" step="0.01" class="form-control" " value="0"></input>
+      {% endif %}
+      <br>
+      <input class="btn btn-primary" type="button" value="Calculate" id="calc" />  &nbsp; &nbsp;
+      <b>Calculated grade:</b>  <span id="totalGrade"></span>
+  </div>
+    </form>
+    <br>
+    
+</div>
+<div class="col-6 bg-light offset-md-1 border border-info rounded">
+	<br>
+	<h4>Content of the course: </h4>
+	<br>
+    <div class="list-group">
+    {% for l in lessons[:] %}
+  	<a href="/courses/{{course.course_id}}/{{l.lesson_id}}" class="list-group-item list-group-item-action">{{l.title}}</a>
+  	{% endfor %}
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

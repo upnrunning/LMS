@@ -1,0 +1,21 @@
+{% extends "header.html" %}
+
+{% block body %}
+
+<div class="containersmall">
+	<div class="row justify-content px-2 md-center bg-light border border-info rounded">
+		<div class="container">
+		<img src="{{url_for('static', filename = 'images/profile_icon.png')}}" class="rounded h-50  mx-auto d-block">
+		<h4 class="text-center"> {{user.name}} </h4>
+		<h5 class="text-center"> GPA: {{gpa}} </h3>
+		<br>
+		<br>
+		<p class="left-float"> <b>Courses: </b>
+			{% for m in markings %}
+		 	{{m.course.name}},&nbsp;	 	
+			{% endfor %}
+		</p>
+	</div>
+</div>
+
+{% endblock %}

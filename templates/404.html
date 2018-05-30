@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title> LMS front page </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="{{ url_for('static',filename='css/bootstrap.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='favicon.ico') }}" rel="shortcut icon">    
+
+<style>
+#center {
+    margin: auto;
+    border-radius: 25px;
+    width: 60%;
+    height: 300px;
+    width: 800px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #b3dbff;
+}
+</style>
+
+</head>
+
+<body class="bodyindex">
+  <div id="center">
+  <img src="{{ url_for('static',filename='images/logo_hse.png') }}" class="rounded mx-auto d-block" width="100" height="128"></img>
+  <h2 align="center" class="display-2">Page not found :(</h1>
+</div>  
+</body>

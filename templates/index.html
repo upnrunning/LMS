@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title> LMS front page </title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="{{ url_for('static',filename='css/bootstrap.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static',filename='favicon.ico') }}" rel="shortcut icon">
+
+	<script type="text/javascript" src = "{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<style>
+#center {
+    margin: auto;
+    border-radius: 25px;
+    width: 60%;
+    height: 300px;
+    width: 400px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #b3dbff;
+}
+</style>
+
+</head>
+<body class="bodyindex">
+	
+
+<div id="center">
+<form action="/" method="post">
+  <div class="form-group-centered">
+  	<img src="{{ url_for('static',filename='images/logo_hse.png') }}" class="rounded mx-auto d-block" width="64" height="82"></img>
+    
+    <label for="InputEmail1">Email address</label>
+    <input type="email" name="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="{{request.form.username}}">
+  </div>
+  
+  <div class="form-group-centered">
+    <label for="InputPassword1">Password</label>
+    <input type="password" name="password" class="form-control" id="InputPassword1" placeholder="Password">
+  </div>
+  <div class="text-center">
+  
+  <button class="btn btn-primary">Sign in</button>
+</div>
+</form>
+</div>
+</body>
+</html>
